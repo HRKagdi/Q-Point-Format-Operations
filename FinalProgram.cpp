@@ -481,6 +481,22 @@ class Operations{
         double a=constant->getDecimal(); double x=real->getDecimal();
         return pow(a,x);
     }
+    double division(){
+        int l1=num1->getLeft(); int l2=num2->getLeft();
+        int r1=num1->getRight(); int r2=num2->getRight();
+        int newl=max(l1,l2); int newr=max(r1,r2);
+
+        FloatingPointNumber* newnum1=this->adjust(l1,r1,newl,newr,num1);
+        FloatingPointNumber* newnum2=this->adjust(l2,r2,newl,newr,num2);
+        
+        int* newnum1integer=newnum1->getInteger();
+        int* newnum1floating=newnum1->getFloating();
+        
+        int* newnum2integer=newnum2->getInteger();
+        int* newnum2floating=newnum2->getFloating();
+        
+        return num1->getDecimal()/num2->getDecimal();
+    }
     
 };
 int main() {
@@ -521,4 +537,6 @@ int main() {
     cout<<op->log10(n2)<<endl;
     cout<<"a^x:: ";
     cout<<op->f(n1,n2)<<endl;
+    
+    cout<<op->division();
 }
